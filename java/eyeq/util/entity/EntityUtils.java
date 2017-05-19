@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -20,6 +21,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
+import java.util.Random;
 
 public class EntityUtils {
     public static ItemStack getArmor(Entity entity, EntityEquipmentSlot slot) {
@@ -112,6 +114,23 @@ public class EntityUtils {
 
         teleporter.placeInExistingPortal(entity, entity.rotationYaw);
         return new BlockPos(entity);
+    }
+
+    public static boolean isValidLightLevel(Entity entity, Random rand) {
+        BlockPos pos = new BlockPos(entity.posX, entity.getEntityBoundingBox().minY, entity.posZ);
+
+        World world = entity.world;
+        if(world.getLightFor(EnumSkyBlock.SKY, pos) > rand.nextInt(32)) {
+            return false;
+        }
+        int light = world.getLightFromNeighbors(pos);
+        if(world.isThundering()) {
+            int skylight = world.getSkylightSubtracted();
+            world.setSkylightSubtracted(10);
+            light = world.getLightFromNeighbors(pos);
+            world.setSkylightSubtracted(skylight);
+        }
+        return light <= rand.nextInt(8);
     }
 
     public static void copyDataFromOld(Entity entity, Entity oldEntity) throws InvocationTargetException, IllegalAccessException {

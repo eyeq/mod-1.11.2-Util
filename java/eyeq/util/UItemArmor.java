@@ -1,4 +1,5 @@
 package eyeq.util;
+// パッケージ間違えてたけど、面倒なので放置
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

@@ -164,7 +164,7 @@ public class UOreDictionary {
         registerOre(CategoryTypes.PREFIX_MEAT, "sheep", Items.MUTTON);
         registerOre(CategoryTypes.PREFIX_MEAT, "rabbit", Items.RABBIT);
         registerOre(CategoryTypes.PREFIX_GRAIN, "wheat", Items.WHEAT);
-        registerOre(CategoryTypes.PREFIX_GRAIN, "cocoa", new ItemStack(Items.DYE, 1, EnumDyeColor.BROWN.getMetadata()));
+        registerOre(CategoryTypes.PREFIX_GRAIN, "cocoa", new ItemStack(Items.DYE, 1, EnumDyeColor.BROWN.getDyeDamage()));
         registerOre(CategoryTypes.PREFIX_FRUIT, "apple", Items.APPLE);
         registerOre(CategoryTypes.PREFIX_FRUIT, "chorus", Items.CHORUS_FRUIT);
         registerOre(CategoryTypes.PREFIX_VEGETABLE, "potato", Items.POTATO);
